@@ -1,0 +1,6 @@
+---
+lang: '{{ repo }}/usr/lang'
+pl_ver: 5.22.0
+rb_ver: 2.1.6
+py_ver: 2.7.10
+

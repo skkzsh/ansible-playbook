@@ -1,0 +1,21 @@
+---
+
+common_pkg:
+  # - git
+  - tig
+  - mercurial
+  - vim
+  - tmux
+  - autojump
+  - the_silver_searcher
+  - htop
+  # - colordiff
+  - atool
+  - go
+  - nodebrew
+  - plenv
+  - perl-build
+  - rbenv
+  - ruby-build
+  - pyenv
+

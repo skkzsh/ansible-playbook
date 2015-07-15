@@ -1,0 +1,60 @@
+---
+
+- name: Use Japanese Repo
+  sudo: yes
+  replace:
+    dest=/etc/apt/sources.list
+    regexp='//archive.ubuntu.com'
+    replace='//ftp.jaist.ac.jp'
+    backup=yes
+  when: ansible_os_family == 'Debian'
+
+- name: apt update
+  sudo: yes
+  apt: update_cache=yes
+  when: ansible_os_family == 'Debian'
+
+- name: apt upgrade
+  sudo: yes
+  apt: upgrade=yes
+  when: ansible_os_family == 'Debian'
+
+- name: apt install
+  sudo: yes
+  apt: pkg={{ item }}
+  with_items:
+    - '{{ common_pkg }}'
+    - '{{ debian_pkg }}'
+  when: ansible_os_family == 'Debian'
+
+# - name: yum update
+#   sudo: yes
+#   yum: update_cache=yes
+#   when: ansible_os_family == 'RedHat'
+
+- name: yum group install
+  sudo: yes
+  yum: name='@Development tools' state=latest
+  when: ansible_os_family == 'RedHat'
+
+- name: yum install
+  sudo: yes
+  yum: name={{ item }} state=latest
+  with_items:
+    - '{{ common_pkg }}'
+    - '{{ redhat_pkg }}'
+  when: ansible_os_family == 'RedHat'
+
+# - name: pacman
+#   pacman: update_cache=yes
+
+# - name: pacman
+#   pacman: name={{ item }} state=latest
+#   with_items:
+
+- name: Set zsh as default shell
+  user: name=vagrant shell=/usr/bin/zsh
+  sudo: yes
+
+# - name: reload
+

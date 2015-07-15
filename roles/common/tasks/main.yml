@@ -1,0 +1,21 @@
+---
+
+- include_vars: from_host.yml
+  when: "'from_host' in group_names"
+
+- include_vars: on_base.yml
+  when: "'on_base' in group_names"
+
+- name: set localtime
+  sudo: yes
+  file: src=/usr/share/zoneinfo/Asia/Tokyo
+        dest=/etc/localtime
+        state=link
+        force=yes
+  # when: ansible_os_family == 'Debian'
+
+# - name: set localtime
+#   sudo: yes
+#   shell: timedatectl set-timezone Asia/Tokyo
+#   when: ansible_os_family == 'RedHat'
+

@@ -1,0 +1,35 @@
+---
+
+common_pkg:
+  - git
+  - ruby
+  - zsh
+  - curl
+  - m4
+  - texinfo
+
+debian_pkg:
+  - apt-file
+  - build-essential
+  - libbz2-dev
+  - libcurl4-openssl-dev
+  - libexpat-dev
+  - libncurses-dev
+  - zlib1g-dev          # brew git
+  - gettext             # brew git
+  # - libcurl4-gnutls-dev # brew git
+  - libx11-dev          # brew git
+  - libpython2.7-dev
+  - language-pack-ja
+
+redhat_pkg:
+  - irb
+  - bzip2-devel
+  - curl-devel
+  - expat-devel
+  - ncurses-devel
+  - zlib-devel
+  - libX11-devel # brew git
+  - perl-ExtUtils-Embed # brew vim
+  - python-devel
+

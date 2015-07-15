@@ -1,0 +1,6 @@
+[from_host]
+localhost:2222
+
+[on_base]
+
+;; vim: ft=dosini

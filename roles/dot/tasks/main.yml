@@ -1,0 +1,53 @@
+---
+
+- include_vars: from_host.yml
+  when: "'from_host' in group_names"
+
+- include_vars: on_base.yml
+  when: "'on_base' in group_names"
+
+# - name: Run setup script
+#   shell: path=~/.Repository/bitbucket/unix_files/usr/setup/dot.sh
+
+- name: mkdir dot dir
+  file: path=~/{{ item }}
+        state=directory
+  with_items: '{{ mkdir }}'
+
+- name: git clone repo
+  git: repo=git@bitbucket.org:skkzsh/unix_files.git
+       dest={{ repo }}
+       accept_hostkey=yes
+  when: "'on_base' in group_names"
+
+# - name: move bashrc
+#   shell: mv ~/.bashrc ~/.bashrc.bk
+
+- name: symlink dotfiles from repo
+  file: src={{ repo }}/{{ item }} dest=~/{{ item }} state=link
+  with_items: '{{ lndir }}'
+
+- name: symlink dotfiles from host
+  file: src={{ share }}/{{ item }} dest=~/{{ item }} state=link
+  with_items:
+    - '{{ lndir_from_host_home }}'
+  when: "'from_host' in group_names"
+
+# - name: symlink dot_vim from repo
+#   file: src={{ repo }}/.vim/{{ item }} dest=~/.vim/{{ item }} state=link
+#   with_items:
+#     - after
+#     - autoload
+#     - colors
+#     - compiler
+#     - conf
+#     - filetype.vim
+#     - ftdetect
+#     - ftplugin
+#     - indent
+#     - plugin
+#     - scripts.vim
+#     - syntax
+#     - bundle/neobundle.vim
+#  when: "'from_host' in group_names"
+

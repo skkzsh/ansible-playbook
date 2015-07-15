@@ -1,0 +1,10 @@
+---
+
+mkdir:
+  - '{{ mkdir_common }}'
+  - '{{ mkdir_host }}'
+
+lndir:
+  - '{{ lndir_common }}'
+  - '{{ lndir_from_host_repo }}'
+

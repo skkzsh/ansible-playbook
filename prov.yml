@@ -1,0 +1,17 @@
+- hosts: all
+  sudo: no
+  user: vagrant
+  roles:
+    # - common
+    # - pkg
+    # - dot
+    # - brew
+    - lang
+    - apache
+
+## dependency
+# lang <- brew <- dot <- pkg, common
+
+## 命名: もう少し考えた方がいい
+# from_host: dotfilesをHost OSから共用する
+# on_base:   dotfilesを共用しない

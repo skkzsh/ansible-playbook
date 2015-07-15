@@ -1,0 +1,51 @@
+---
+
+- include_vars: debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include_vars: redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+# - name: apt update
+#   sudo: yes
+#   apt: update_cache=yes
+#   when: ansible_os_family == 'Debian'
+
+# - name: apt upgrade
+#   sudo: yes
+#   apt: upgrade=yes
+#   when: ansible_os_family == 'Debian'
+
+- name: apt install amp
+  sudo: yes
+  apt: pkg={{ item }}
+  with_items:
+    - apache2
+    - php5
+  when: ansible_os_family == 'Debian'
+
+- name: yum install amp
+  sudo: yes
+  yum: name={{ item }} state=latest
+  with_items:
+    - httpd
+    - php
+  when: ansible_os_family == 'RedHat'
+
+- name: enable module
+  sudo: yes
+  apache2_module: name={{ item }} state=present
+  with_items:
+    - userdir
+  notify:
+    - reload apache
+
+- name: Commentout
+  sudo: yes
+  lineinfile:
+    dest=/etc/apache2/mods-available/php5.conf
+    regexp='[^#]*php_admin_flag engine Off'
+    line='# php_admin_flag engine Off'
+    backup=yes
+  when: ansible_os_family == 'Debian'
+

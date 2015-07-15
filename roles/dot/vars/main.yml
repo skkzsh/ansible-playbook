@@ -1,0 +1,57 @@
+---
+
+mkdir_common:
+  - .bash
+  - .zsh
+
+lndir_common:
+  - .bash_profile
+  - .bashrc
+  - .bash/conf
+  - .inputrc
+  - .zprofile
+  - .zshrc
+  - .zsh/conf
+  - .zsh/functions
+  - .ssh/config
+  - .vimrc
+  - .tmux.conf
+  - .gitconfig
+  - .gitignore
+  - .ackrc
+  - .peco
+
+
+mkdir_host:
+  - .vim
+  - .vim/bundle
+
+lndir_from_host_repo:
+  - .vim/bundle/neobundle.vim
+  - .vim/after
+  - .vim/autoload
+  - .vim/colors
+  - .vim/compiler
+  - .vim/conf
+  - .vim/filetype.vim
+  - .vim/ftdetect
+  - .vim/ftplugin
+  - .vim/indent
+  - .vim/plugin
+  - .vim/scripts.vim
+  - .vim/syntax
+
+lndir_from_host_home:
+  - .bash/bundle
+  - .zsh/bundle
+  - .antigen
+
+# TODO: ssh key
+
+
+mkdir_base:
+  - Repository/bitbucket
+
+lndir_on_base:
+  - .vim
+

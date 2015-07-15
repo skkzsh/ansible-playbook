@@ -1,0 +1,10 @@
+---
+
+mkdir:
+  - '{{ mkdir_common }}'
+  - '{{ mkdir_base }}'
+
+lndir:
+  - '{{ lndir_common }}'
+  - '{{ lndir_on_base }}'
+
