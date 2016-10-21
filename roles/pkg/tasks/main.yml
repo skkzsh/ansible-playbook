@@ -27,6 +27,24 @@
     - '{{ debian_pkg }}'
   when: ansible_os_family == 'Debian'
 
+# - name: Use Japanese Repo
+#   sudo: yes
+#   replace:
+#     dest=/etc/yum.repos.d/CentOS-Base.repo
+#     regexp=''
+#     replace=''
+#     backup=yes
+#   when: ansible_os_family == 'Redhat'
+
+# - name: Use Japanese Repo
+#   sudo: yes
+#   replace:
+#     dest=/etc/yum/pluginconf.d/fastestmirror.conf
+#     regexp=''
+#     replace=''
+#     backup=yes
+#   when: ansible_os_family == 'Redhat'
+
 # - name: yum update
 #   sudo: yes
 #   yum: update_cache=yes

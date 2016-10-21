@@ -7,7 +7,7 @@
     # - dot
     # - brew
     - lang
-    - apache
+    # - apache
 
 ## dependency
 # lang <- brew <- dot <- pkg, common

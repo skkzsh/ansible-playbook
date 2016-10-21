@@ -1,0 +1,5 @@
+- hosts: all
+  sudo: no
+  user: vagrant
+  roles:
+    - apache

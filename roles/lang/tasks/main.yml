@@ -5,21 +5,21 @@
   with_items:
     - github.com/peco/peco/cmd/peco
 
-- name: check nodebrew
-  stat: path=~/.nodebrew/current
-  register: check_nodebrew
+# - name: check nodebrew
+#   stat: path=~/.nodebrew/current
+#   register: check_nodebrew
+#
+# - name: nodebrew install
+#   shell: ~/.linuxbrew/bin/nodebrew install-binary stable
+#   when: not check_nodebrew.stat.exists
+#
+# - name: nodebrew use
+#   shell: ~/.linuxbrew/bin/nodebrew use stable
+#   when: not check_nodebrew.stat.exists
 
-- name: nodebrew install
-  shell: ~/.linuxbrew/bin/nodebrew install-binary stable
-  when: not check_nodebrew.stat.exists
-
-- name: nodebrew use
-  shell: ~/.linuxbrew/bin/nodebrew use stable
-  when: not check_nodebrew.stat.exists
-
-- name: npm install
-  shell: bash -lc 'npm install -g'
-         chdir={{ lang }}
+# - name: npm install
+#   shell: bash -lc 'npm install -g'
+#          chdir={{ lang }}
 
 - name: check pyenv
   stat: path=~/.pyenv/version
@@ -38,47 +38,47 @@
 - name: pyenv rehash
   shell: bash -lc 'pyenv rehash'
 
-- name: check rbenv
-  stat: path=~/.rbenv/version
-  register: check_rbenv
+# - name: check rbenv
+#   stat: path=~/.rbenv/version
+#   register: check_rbenv
+#
+# - name: rbenv install
+#   shell: bash -lc 'rbenv install {{ rb_ver }}'
+#   when: not check_rbenv.stat.exists
+#
+# - name: rbenv global
+#   shell: bash -lc 'rbenv global {{ rb_ver }}'
+#
+# - name: gem install bundle
+#   shell: bash -lc 'rbenv exec gem install bundler'
+#
+# - name: gem
+#   shell: bash -lc 'rbenv exec bundle install'
+#          chdir={{ lang }}
+#
+# - name: rbenv rehash
+#   shell: bash -lc 'rbenv rehash'
 
-- name: rbenv install
-  shell: bash -lc 'rbenv install {{ rb_ver }}'
-  when: not check_rbenv.stat.exists
-
-- name: rbenv global
-  shell: bash -lc 'rbenv global {{ rb_ver }}'
-
-- name: gem install bundle
-  shell: bash -lc 'rbenv exec gem install bundler'
-
-- name: gem
-  shell: bash -lc 'rbenv exec bundle install'
-         chdir={{ lang }}
-
-- name: rbenv rehash
-  shell: bash -lc 'rbenv rehash'
-
-- name: check plenv
-  stat: path=~/.plenv/version
-  register: check_plenv
-
-- name: plenv install
-  shell: bash -lc 'plenv install {{ pl_ver }}'
-  when: not check_plenv.stat.exists
-
-- name: plenv global
-  shell: bash -lc 'plenv global {{ pl_ver }}'
-
-- name: plenv install-cpanm
-  shell: bash -lc 'plenv install-cpanm'
-  when: not check_plenv.stat.exists
-
-- name: cpanm
-  shell: bash -lc 'plenv exec cpanm --installdeps {{ lang }}'
-
-- name: plenv rehash
-  shell: bash -lc 'plenv rehash'
+# - name: check plenv
+#   stat: path=~/.plenv/version
+#   register: check_plenv
+#
+# - name: plenv install
+#   shell: bash -lc 'plenv install {{ pl_ver }}'
+#   when: not check_plenv.stat.exists
+#
+# - name: plenv global
+#   shell: bash -lc 'plenv global {{ pl_ver }}'
+#
+# - name: plenv install-cpanm
+#   shell: bash -lc 'plenv install-cpanm'
+#   when: not check_plenv.stat.exists
+#
+# - name: cpanm
+#   shell: bash -lc 'plenv exec cpanm --installdeps {{ lang }}'
+#
+# - name: plenv rehash
+#   shell: bash -lc 'plenv rehash'
 
 # - name: neobundle
 

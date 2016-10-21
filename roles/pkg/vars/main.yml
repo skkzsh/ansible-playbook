@@ -2,9 +2,15 @@
 
 common_pkg:
   - git
+  # - mercurial
   - ruby
   - zsh
   - curl
+  - wget
+  - vim
+  - tmux
+  - gawk
+  # - golang
   - m4
   - texinfo
 
@@ -15,12 +21,20 @@ debian_pkg:
   - libcurl4-openssl-dev
   - libexpat-dev
   - libncurses-dev
+  - libncursesw5-dev
   - zlib1g-dev          # brew git
   - gettext             # brew git
   # - libcurl4-gnutls-dev # brew git
   - libx11-dev          # brew git
   - libpython2.7-dev
+  - libssl-dev
+  - libreadline-dev
+  - libsqlite3-dev
+  - xz-utils
   - language-pack-ja
+  - atool
+  - htop
+  - silversearcher-ag
 
 redhat_pkg:
   - irb
@@ -32,4 +46,13 @@ redhat_pkg:
   - libX11-devel # brew git
   - perl-ExtUtils-Embed # brew vim
   - python-devel
+  - readline-devel
+  - sqlite-devel
+  - openssl-devel
+  - xz
+  # - epel-release
+
+epel_pkg:
+  - htop
+  - the_silver_searcher
 

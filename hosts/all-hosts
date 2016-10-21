@@ -1,5 +1,7 @@
 [from_host]
 localhost:2222
+;; vagrant-ubuntu
+;; vagrant-centos
 
 [on_base]
 

@@ -24,6 +24,12 @@
     - php5
   when: ansible_os_family == 'Debian'
 
+# - name: yum update
+#   sudo: yes
+#   yum: update_cache=yes
+#   when: ansible_os_family == 'RedHat'
+
+# group install 'basic web server'
 - name: yum install amp
   sudo: yes
   yum: name={{ item }} state=latest
@@ -32,13 +38,20 @@
     - php
   when: ansible_os_family == 'RedHat'
 
+- name: start apache
+  sudo: yes
+  service: name={{ daemon }} state=started enabled=yes
+
 - name: enable module
   sudo: yes
   apache2_module: name={{ item }} state=present
   with_items:
     - userdir
+    - status
+    - info
   notify:
     - reload apache
+  when: ansible_os_family == 'Debian'
 
 - name: Commentout
   sudo: yes
@@ -49,3 +62,53 @@
     backup=yes
   when: ansible_os_family == 'Debian'
 
+- name: enable userdir
+  sudo: yes
+  lineinfile:
+    dest=/etc/httpd/conf.d/userdir.conf
+    backup=yes
+    regexp='[^#]*UserDir disabled'
+    line='# UserDir disabled'
+  notify:
+    - reload apache
+  when: ansible_os_family == 'RedHat'
+
+- name: enable userdir
+  sudo: yes
+  lineinfile:
+    dest=/etc/httpd/conf.d/userdir.conf
+    backup=yes
+    regexp='#UserDir public_html'
+    line='UserDir public_html'
+  notify:
+    - reload apache
+  when: ansible_os_family == 'RedHat'
+
+- name: Server Status
+  sudo: yes
+  copy: src=server-status.conf dest=/etc/httpd/conf.d
+  notify:
+    - reload apache
+  when: ansible_os_family == 'RedHat'
+
+- name: Server Info
+  sudo: yes
+  copy: src=server-info.conf dest=/etc/httpd/conf.d
+  notify:
+    - reload apache
+  when: ansible_os_family == 'RedHat'
+
+# - name: chmod usedir
+
+- name: mkdir public_html
+  file: path=~/public_html
+        state=directory
+
+- name: template index.html
+  copy: src=index.html dest=~/public_html
+
+- name: template info.php
+  copy: src=info.php dest=~/public_html
+
+# firewall
+# when: ansible_os_family == 'RedHat'

@@ -14,12 +14,12 @@
 - name: brew upgrade
   shell: ~/.linuxbrew/bin/brew upgrade
 
-- name: symlink gcc to brew dir
-  file: src=/usr/bin/{{ item }} dest=~/.linuxbrew/bin/{{ item }}-4.8 state=link
-  with_items:
-    - gcc
-    - g++
-  when: ansible_os_family == 'RedHat'
+# - name: symlink gcc to brew dir
+#   file: src=/usr/bin/{{ item }} dest=~/.linuxbrew/bin/{{ item }}-4.8 state=link
+#   with_items:
+#     - gcc
+#     - g++
+#   when: ansible_os_family == 'RedHat'
 
 - name: brew install
   shell: ~/.linuxbrew/bin/brew install {{ item }}

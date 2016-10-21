@@ -2,20 +2,22 @@
 
 common_pkg:
   # - git
-  - tig
-  - mercurial
-  - vim
-  - tmux
+  # - mercurial
+  # - vim
+  # - tmux
   - autojump
   - the_silver_searcher
+  # - gawk
   - htop
-  # - colordiff
   - atool
+  # - nkf
+  # - keychain
   - go
-  - nodebrew
-  - plenv
-  - perl-build
-  - rbenv
-  - ruby-build
+  # - peco
+  # - nodebrew
+  # - plenv
+  # - perl-build
+  # - rbenv
+  # - ruby-build
   - pyenv
 

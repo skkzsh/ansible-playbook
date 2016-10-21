@@ -20,7 +20,7 @@ lndir_common:
   - .gitignore
   - .ackrc
   - .peco
-
+# FIXME: .bash_profile, .bashrc exists
 
 mkdir_host:
   - .vim
@@ -44,7 +44,7 @@ lndir_from_host_repo:
 lndir_from_host_home:
   - .bash/bundle
   - .zsh/bundle
-  - .antigen
+  #  - .zplug
 
 # TODO: ssh key
 

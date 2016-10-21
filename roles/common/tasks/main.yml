@@ -12,10 +12,18 @@
         dest=/etc/localtime
         state=link
         force=yes
-  # when: ansible_os_family == 'Debian'
+  when: ansible_os_family == 'Debian'
 
-# - name: set localtime
-#   sudo: yes
-#   shell: timedatectl set-timezone Asia/Tokyo
-#   when: ansible_os_family == 'RedHat'
+- name: set localtime
+  sudo: yes
+  shell: timedatectl set-timezone Asia/Tokyo
+  when: ansible_os_family == 'RedHat'
 
+- name: disable selinux
+  sudo: yes
+  lineinfile:
+    dest=/etc/sysconfig/selinux
+    regexp='SELINUX=enforcing'
+    line='SELINUX=disabled'
+    backup=yes
+  when: ansible_os_family == 'RedHat'
