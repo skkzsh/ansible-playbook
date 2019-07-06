@@ -6,7 +6,8 @@
     - github.com/peco/peco/cmd/peco
 
 # - name: check nodebrew
-#   stat: path=~/.nodebrew/current
+#   stat:
+#     path: ~/.nodebrew/current
 #   register: check_nodebrew
 #
 # - name: nodebrew install
@@ -19,10 +20,11 @@
 
 # - name: npm install
 #   shell: bash -lc 'npm install -g'
-#          chdir={{ lang }}
+#          chdir: {{ lang }}
 
 - name: check pyenv
-  stat: path=~/.pyenv/version
+  stat:
+    path: ~/.pyenv/version
   register: check_pyenv
 
 - name: pyenv install
@@ -39,7 +41,8 @@
   shell: bash -lc 'pyenv rehash'
 
 # - name: check rbenv
-#   stat: path=~/.rbenv/version
+#   stat:
+#     path: ~/.rbenv/version
 #   register: check_rbenv
 #
 # - name: rbenv install
@@ -54,13 +57,14 @@
 #
 # - name: gem
 #   shell: bash -lc 'rbenv exec bundle install'
-#          chdir={{ lang }}
+#          chdir: {{ lang }}
 #
 # - name: rbenv rehash
 #   shell: bash -lc 'rbenv rehash'
 
 # - name: check plenv
-#   stat: path=~/.plenv/version
+#   stat:
+#     path: ~/.plenv/version
 #   register: check_plenv
 #
 # - name: plenv install

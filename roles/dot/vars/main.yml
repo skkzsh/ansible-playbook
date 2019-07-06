@@ -1,24 +1,27 @@
 ---
 
 mkdir_common:
-  - .bash
-  - .zsh
+  # - .bash
+  # - .zsh
 
 lndir_common:
   - .bash_profile
   - .bashrc
-  - .bash/conf
+  - .bash
+  # - .bash/conf
   - .inputrc
   - .zprofile
   - .zshrc
-  - .zsh/conf
-  - .zsh/functions
+  - .zsh
+  # - .zsh/conf
+  # - .zsh/functions
   - .ssh/config
+  - .ssh/conf.d
   - .vimrc
   - .tmux.conf
   - .gitconfig
+  - .gitconfig.d
   - .gitignore
-  - .ackrc
   - .peco
 # FIXME: .bash_profile, .bashrc exists
 
@@ -30,7 +33,6 @@ lndir_from_host_repo:
   - .vim/bundle/neobundle.vim
   - .vim/after
   - .vim/autoload
-  - .vim/colors
   - .vim/compiler
   - .vim/conf
   - .vim/filetype.vim
@@ -42,9 +44,9 @@ lndir_from_host_repo:
   - .vim/syntax
 
 lndir_from_host_home:
-  - .bash/bundle
-  - .zsh/bundle
-  #  - .zplug
+  # - .bash/bundle
+  # - .zsh/bundle
+  # - .zplug
 
 # TODO: ssh key
 

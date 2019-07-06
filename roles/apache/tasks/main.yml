@@ -7,44 +7,55 @@
   when: ansible_os_family == 'RedHat'
 
 # - name: apt update
-#   sudo: yes
-#   apt: update_cache=yes
+#   become: true
+#   apt:
+#     update_cache: true
 #   when: ansible_os_family == 'Debian'
 
 # - name: apt upgrade
-#   sudo: yes
-#   apt: upgrade=yes
+#   become: true
+#   apt:
+#     upgrade: true
 #   when: ansible_os_family == 'Debian'
 
 - name: apt install amp
-  sudo: yes
-  apt: pkg={{ item }}
+  become: true
+  apt:
+    pkg: '{{ item }}'
   with_items:
     - apache2
-    - php5
+    - php
   when: ansible_os_family == 'Debian'
 
 # - name: yum update
-#   sudo: yes
-#   yum: update_cache=yes
+#   become: true
+#   yum:
+#     update_cache: true
 #   when: ansible_os_family == 'RedHat'
 
 # group install 'basic web server'
 - name: yum install amp
-  sudo: yes
-  yum: name={{ item }} state=latest
+  become: true
+  yum:
+    name: '{{ item }}'
+    state: latest
   with_items:
     - httpd
     - php
   when: ansible_os_family == 'RedHat'
 
 - name: start apache
-  sudo: yes
-  service: name={{ daemon }} state=started enabled=yes
+  become: true
+  service:
+    name: '{{ daemon }}'
+    state: started
+    enabled: true
 
 - name: enable module
-  sudo: yes
-  apache2_module: name={{ item }} state=present
+  become: true
+  apache2_module:
+    name: '{{ item }}'
+    state: present
   with_items:
     - userdir
     - status
@@ -53,47 +64,51 @@
     - reload apache
   when: ansible_os_family == 'Debian'
 
-- name: Commentout
-  sudo: yes
-  lineinfile:
-    dest=/etc/apache2/mods-available/php5.conf
-    regexp='[^#]*php_admin_flag engine Off'
-    line='# php_admin_flag engine Off'
-    backup=yes
-  when: ansible_os_family == 'Debian'
+# - name: Commentout
+#   become: true
+#   lineinfile:
+#     dest: /etc/apache2/mods-available/php5.conf
+#     regexp: '[^#]*php_admin_flag engine Off'
+#     line: '# php_admin_flag engine Off'
+#     backup: true
+#   when: ansible_os_family == 'Debian'
 
 - name: enable userdir
-  sudo: yes
+  become: true
   lineinfile:
-    dest=/etc/httpd/conf.d/userdir.conf
-    backup=yes
-    regexp='[^#]*UserDir disabled'
-    line='# UserDir disabled'
+    dest: /etc/httpd/conf.d/userdir.conf
+    backup: true
+    regexp: '[^#]*UserDir disabled'
+    line: '# UserDir disabled'
   notify:
     - reload apache
   when: ansible_os_family == 'RedHat'
 
 - name: enable userdir
-  sudo: yes
+  become: true
   lineinfile:
-    dest=/etc/httpd/conf.d/userdir.conf
-    backup=yes
-    regexp='#UserDir public_html'
-    line='UserDir public_html'
+    dest: /etc/httpd/conf.d/userdir.conf
+    backup: true
+    regexp: '#UserDir public_html'
+    line: 'UserDir public_html'
   notify:
     - reload apache
   when: ansible_os_family == 'RedHat'
 
 - name: Server Status
-  sudo: yes
-  copy: src=server-status.conf dest=/etc/httpd/conf.d
+  become: true
+  copy:
+    src: server-status.conf
+    dest: /etc/httpd/conf.d
   notify:
     - reload apache
   when: ansible_os_family == 'RedHat'
 
 - name: Server Info
-  sudo: yes
-  copy: src=server-info.conf dest=/etc/httpd/conf.d
+  become: true
+  copy:
+    src: server-info.conf
+    dest: /etc/httpd/conf.d
   notify:
     - reload apache
   when: ansible_os_family == 'RedHat'
@@ -101,14 +116,19 @@
 # - name: chmod usedir
 
 - name: mkdir public_html
-  file: path=~/public_html
-        state=directory
+  file:
+    path: ~/public_html
+    state: directory
 
 - name: template index.html
-  copy: src=index.html dest=~/public_html
+  copy:
+    src: index.html
+    dest: ~/public_html
 
 - name: template info.php
-  copy: src=info.php dest=~/public_html
+  copy:
+    src: info.php
+    dest: ~/public_html
 
 # firewall
 # when: ansible_os_family == 'RedHat'

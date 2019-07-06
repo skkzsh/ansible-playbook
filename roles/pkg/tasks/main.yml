@@ -1,78 +1,93 @@
 ---
 
 - name: Use Japanese Repo
-  sudo: yes
+  become: true
   replace:
-    dest=/etc/apt/sources.list
-    regexp='//archive.ubuntu.com'
-    replace='//ftp.jaist.ac.jp'
-    backup=yes
-  when: ansible_os_family == 'Debian'
+    dest: /etc/apt/sources.list
+    regexp: '//archive.ubuntu.com'
+    replace: '//ftp.jaist.ac.jp'
+    backup: true
+  when: ansible_distribution == 'Ubuntu'
 
 - name: apt update
-  sudo: yes
-  apt: update_cache=yes
+  become: true
+  apt:
+    update_cache: true
   when: ansible_os_family == 'Debian'
 
 - name: apt upgrade
-  sudo: yes
-  apt: upgrade=yes
+  become: true
+  apt:
+    upgrade: true
   when: ansible_os_family == 'Debian'
 
 - name: apt install
-  sudo: yes
-  apt: pkg={{ item }}
+  become: true
+  apt:
+    pkg: '{{ item }}'
   with_items:
     - '{{ common_pkg }}'
     - '{{ debian_pkg }}'
   when: ansible_os_family == 'Debian'
 
 # - name: Use Japanese Repo
-#   sudo: yes
+#   become: true
 #   replace:
-#     dest=/etc/yum.repos.d/CentOS-Base.repo
-#     regexp=''
-#     replace=''
-#     backup=yes
+#     dest: /etc/yum.repos.d/CentOS-Base.repo
+#     regexp: ''
+#     replace: ''
+#     backup: true
 #   when: ansible_os_family == 'Redhat'
 
 # - name: Use Japanese Repo
-#   sudo: yes
+#   become: true
 #   replace:
-#     dest=/etc/yum/pluginconf.d/fastestmirror.conf
-#     regexp=''
-#     replace=''
-#     backup=yes
+#     dest: /etc/yum/pluginconf.d/fastestmirror.conf
+#     regexp: ''
+#     replace: ''
+#     backup: true
 #   when: ansible_os_family == 'Redhat'
 
 # - name: yum update
-#   sudo: yes
-#   yum: update_cache=yes
+#   become: true
+#   yum:
+#     update_cache: true
 #   when: ansible_os_family == 'RedHat'
 
 - name: yum group install
-  sudo: yes
-  yum: name='@Development tools' state=latest
+  become: true
+  yum:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - '{{ redhat_group_pkg }}'
   when: ansible_os_family == 'RedHat'
 
 - name: yum install
-  sudo: yes
-  yum: name={{ item }} state=latest
+  become: true
+  yum:
+    name: '{{ item }}'
+    state: latest
   with_items:
     - '{{ common_pkg }}'
     - '{{ redhat_pkg }}'
   when: ansible_os_family == 'RedHat'
 
 # - name: pacman
-#   pacman: update_cache=yes
+#   pacman:
+#     update_cache: true
 
 # - name: pacman
-#   pacman: name={{ item }} state=latest
+#   pacman:
+#     name: '{{ item }}'
+#     state: latest
 #   with_items:
 
 - name: Set zsh as default shell
-  user: name=vagrant shell=/usr/bin/zsh
-  sudo: yes
+  user:
+    name: vagrant
+    shell: /bin/zsh
+  become: true
 
 # - name: reload
 

@@ -8,31 +8,38 @@ common_pkg:
   - curl
   - wget
   - vim
-  - tmux
+  # - tmux
   - gawk
   # - golang
   - m4
   - texinfo
+  - libffi-dev  # brew pyenv python
+  - python-setuptools
 
 debian_pkg:
   - apt-file
   - build-essential
-  - libbz2-dev
+  - libbz2-dev           # brew pyenv python
   - libcurl4-openssl-dev
   - libexpat-dev
-  - libncurses-dev
-  - libncursesw5-dev
-  - zlib1g-dev          # brew git
-  - gettext             # brew git
+  - libncurses5-dev  # brew pyenv python
+  - libncursesw5-dev # brew pyenv python
+  - zlib1g-dev            # brew git
+  - gettext               # brew git
   # - libcurl4-gnutls-dev # brew git
-  - libx11-dev          # brew git
-  - libpython2.7-dev
-  - libssl-dev
-  - libreadline-dev
-  - libsqlite3-dev
-  - xz-utils
+  - libx11-dev            # brew git
+  # - libpython2.7-dev
+  - libssl-dev      # brew pyenv python
+  - libreadline-dev # brew pyenv python
+  - libsqlite3-dev  # brew pyenv python
+  - xz-utils        # brew pyenv python
+  - llvm            # brew pyenv python
+  - tk-dev          # brew pyenv python
+  - liblzma-dev     # brew pyenv python
+  - python-openssl  # brew pyenv python
   - language-pack-ja
   - atool
+  - tmux
   - htop
   - silversearcher-ag
 
@@ -52,7 +59,12 @@ redhat_pkg:
   - xz
   # - epel-release
 
+redhat_group_pkg:
+  - '@Development tools'
+  # - '@Japanese Support'
+
 epel_pkg:
+  - tmux
   - htop
   - the_silver_searcher
 

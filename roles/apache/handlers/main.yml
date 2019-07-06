@@ -1,6 +1,8 @@
 ---
 
 - name: reload apache
-  sudo: yes
-  service: name={{ daemon }} state=reloaded
+  become: true
+  service:
+    name: '{{ daemon }}'
+    state: reloaded
 

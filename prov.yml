@@ -1,12 +1,12 @@
 - hosts: all
-  sudo: no
+  become: false
   user: vagrant
   roles:
     # - common
     # - pkg
-    # - dot
+    - dot
     # - brew
-    - lang
+    # - lang
     # - apache
 
 ## dependency

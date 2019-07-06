@@ -1,28 +1,33 @@
 ---
 
 - name: check brew dir
-  stat: path=~/.linuxbrew
+  stat:
+    path: ~/.linuxbrew
   register: before_brew
 
 - name: get brew
   when: not before_brew.stat.exists
   shell: git clone https://github.com/Homebrew/linuxbrew.git ~/.linuxbrew
 
+# FIXME
 - name: brew update
-  shell: ~/.linuxbrew/bin/brew update
+  shell: bash -lc 'brew update'
 
 - name: brew upgrade
-  shell: ~/.linuxbrew/bin/brew upgrade
+  shell: bash -lc 'brew upgrade'
 
 # - name: symlink gcc to brew dir
-#   file: src=/usr/bin/{{ item }} dest=~/.linuxbrew/bin/{{ item }}-4.8 state=link
+#   file:
+#     src: /usr/bin/{{ item }}
+#     dest: ~/.linuxbrew/bin/{{ item }}-4.8
+#     state: link
 #   with_items:
 #     - gcc
 #     - g++
 #   when: ansible_os_family == 'RedHat'
 
 - name: brew install
-  shell: ~/.linuxbrew/bin/brew install {{ item }}
+  shell: bash -lc 'brew install {{ item }}'
   with_items:
     - '{{ common_pkg }}'
 
